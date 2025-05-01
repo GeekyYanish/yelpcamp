@@ -1,0 +1,48 @@
+<% layout('layouts/BOILERPLATE') %> <!-- This line is used to pass the content of this index.ejs file through the boilerplaye Ejs in the layouts folder for styling-->
+
+<div id="cluster-map"></div>
+
+<h1>All Campgrounds</h1>
+
+<div>
+    <a href="/campgrounds/new">Add a new campground </a>
+</div>
+<ul>
+    <!-- This looping is to show the campgrounds available -->
+    <% for (let campground of campgrounds) {%>
+        <div class="card mb-3">
+            <div class="row">
+                <div class="col-md-4">
+                    <%if(campground.image.length) {%>
+                        <img crossorigin="anonymous" class="img-fluid" alt="" src="<%=campground.image[0].url%>">
+                        <% }else {%>
+                        <img crossorigin="anonymous" class="img-fluid" alt=""
+                            src="https://res.cloudinary.com/dycyryrg9/image/upload/v1745433586/YelpCamp/glqguptgjtraawz3tzyz.jpg">
+                        <% } %>
+                </div>
+                <div class="col-md-8">
+                    <div class="card-body">
+                        <h5 class="card-title">
+                            <%= campground.title  %>
+                        </h5>
+                        <p class="card-text">
+                            <%= campground.description %>
+                        </p>
+                        <p class="card-text">
+                            <small class="text-secondary"><%= campground.location %></small>
+                        </p>
+                        
+                        <a class="btn btn-primary" href="/campgrounds/<%= campground._id%>">View <%= campground.title%></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    <%}%>
+</ul>
+
+<script>
+    const maptilerApiKey = '<%- process.env.MAPTILER_API_KEY %>';
+    const campgrounds = { features: <%- JSON.stringify(campgrounds) %>}
+</script>
+
+<script src="/javascripts/clusterMap.js"></script>

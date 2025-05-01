@@ -1,0 +1,111 @@
+<% layout('layouts/BOILERPLATE') %>
+<!-- This line is used to pass the content of this index.ejs file through the boilerplaye Ejs in the layouts folder for styling-->
+
+<div class="row">
+    <h1 class="text-center">Edit Campground</h1>
+    <div class="col-6 offset-3">
+        <!--This form submits the new updated value and redirects to the show page-->
+        <form
+            action="/campgrounds/<%= campID._id%>?_method=PUT"
+            method="post"
+            novalidate
+            class="validated-form"
+            enctype="multipart/form-data"
+        >
+            <!--Method here used is PUT thanks to method override-->
+            <!-- This is for the title section -->
+            <div class="mb-3">
+                <label class="form-label" for="title">Title</label>
+                <!-- Bootstrap for form -->
+                <input
+                    class="form-control border border-black"
+                    type="text"
+                    id="title"
+                    name="campground[title]"
+                    value="<%= campID.title%>"
+                    required
+                />
+            </div>
+            <!-- This is for the location section -->
+            <div class="mb-3">
+                <label class="form-label" for="location">Location</label>
+                <!-- Bootstrap for form -->
+                <input
+                    class="form-control border border-black"
+                    type="text"
+                    id="location"
+                    name="campground[location]"
+                    value="<%= campID.location%>"
+                    required
+                />
+            </div>
+
+            <!-- This is for the price section -->
+            <div class="mb-3">
+                <label class="form-label" for="price">Campground Price</label>
+                <div class="input-group">
+                    <span class="input-group-text" id="price-label">$</span>
+                    <input
+                        type="text"
+                        class="form-control"
+                        id="price"
+                        placeholder="0.00"
+                        aria-label="price"
+                        aria-describedby="price-label"
+                        name="campground[price]"
+                        value="<%= campID.price%>"
+                        required
+                    />
+                </div>
+            </div>
+
+            <!-- This is for the description section -->
+            <div class="mb-3">
+                <label class="form-label" for="description">Description</label>
+                <!-- Bootstrap for form -->
+                <textarea
+                    class="form-control border border-black"
+                    type="text"
+                    id="location"
+                    name="campground[description]"
+                    required
+                ><%= campID.description%>
+            </textarea>
+            </div>
+
+            <!-- This line of code is to upload the images to the cloudinary-->
+            <div class="mb-3">
+                <div class="input-group custom-file">
+                    <input
+                        type="file"
+                        class="form-control"
+                        id="image"
+                        name="image"
+                        multiple
+                    />
+                </div>
+            </div>
+
+            <!-- This is to delete the images-->
+            <div class="mb-3">
+            <% campID.image.forEach(function(img, i) {  %>
+
+                <img src="<%=img.thumbnail %>" class="img-thumbnail" alt="">
+                <div class="form-check-inline">
+                    <input type="checkbox" id="image-<%=i%>" name="deleteImages[]" value="<%=img.filename%>"> <!-- The value is to check the images on the server sidee-->
+                </div>
+                <label for="image-<%=i%>">Delete?</label>
+                <% })%>
+            </div>
+
+            <div class="mb-3">
+                <!-- Bootstrap for button -->
+                <button class="btn btn-info">Update Campground</button>
+            </div>
+            <div>
+                <a href="/campgrounds/<%= campID._id%>">Back to Campground</a>
+                <!--This takes us back to the show page-->
+            </div>
+        </form>
+    </div>
+</div>

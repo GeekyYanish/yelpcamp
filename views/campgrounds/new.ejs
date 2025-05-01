@@ -1,0 +1,108 @@
+<% layout('layouts/BOILERPLATE') %>
+<!-- This line is used to pass the content of this index.ejs file through the boilerplaye Ejs in the layouts folder for styling-->
+<div class="row">
+    <h1 class="text-center">New Campground</h1>
+    <div class="col-md-6 offset-md-3">
+        <!-- The form is to get the response from the user and add in the campgrounds -->
+        <form
+            action="/campgrounds"
+            method="post"
+            novalidate
+            class="validated-form"
+            enctype="multipart/form-data"
+        >
+            <!-- This is for the title section -->
+            <div class="mb-3">
+                <label class="form-label" for="title">Title</label>
+                <!-- Bootstrap for form -->
+                <input
+                    class="form-control border border-black"
+                    type="text"
+                    id="title"
+                    name="campground[title]"
+                    required
+                />
+                <div class="valid-feedback">Looks good</div>
+            </div>
+
+            <!-- This is for the location section -->
+            <div class="mb-3">
+                <label class="form-label" for="location">Location</label>
+                <!-- Bootstrap for form -->
+                <input
+                    class="form-control border border-black"
+                    type="text"
+                    id="location"
+                    name="campground[location]"
+                    required
+                />
+            </div>
+
+            
+            <!-- This is for the image address section
+            <div class="mb-3">
+                <label class="form-label" for="image">Image URL</label>
+                <!-- Bootstrap for form
+                <input
+                    class="form-control border border-black"
+                    type="text"
+                    id="image"
+                    name="campground[image]"
+                    required
+                />
+            </div> -->
+            <!-- This is for the price section -->
+            <div class="mb-3">
+                <label class="form-label" for="price">Campground Price</label>
+                <div class="input-group">
+                    <span class="input-group-text" id="price-label">$</span>
+                    <input
+                        type="text"
+                        class="form-control"
+                        id="price"
+                        placeholder="0.00"
+                        aria-label="price"
+                        aria-describedby="price-label"
+                        name="campground[price]"
+                        required
+                    />
+                </div>
+            </div>
+
+            <!-- This is for the description section -->
+            <div class="mb-3">
+                <label class="form-label" for="description">Description</label>
+                <!-- Bootstrap for form -->
+                <textarea
+                    class="form-control border border-black"
+                    type="text"
+                    id="location"
+                    name="campground[description]"
+                    required
+                ></textarea>
+            </div>
+
+            <!-- This line of code is to upload the images to the cloudinary-->
+            <div class="mb-3">
+                <div class="input-group custom-file">
+                    <input
+                        type="file"
+                        class="form-control"
+                        id="image"
+                        name="image"
+                        multiple
+                    />
+                </div>
+            </div>
+
+            <div class="mb-3">
+                <!-- Bootstrap for button -->
+                <button class="btn btn-success">Add Campground</button>
+            </div>
+            <!-- This link takes us back to the index page -->
+            <div>
+                <a href="/campgrounds">All Campgrounds</a>
+            </div>
+        </form>
+    </div>
+</div>
